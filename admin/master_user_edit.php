@@ -1,6 +1,7 @@
 <?php
-require '../config/koneksi.php';
-
+session_start();
+include 'session.php';
+include '../config/koneksi.php';
 // Periksa apakah UserID dikirim melalui GET
 if (isset($_GET['UserID'])) {
     $userID = $_GET['UserID'];

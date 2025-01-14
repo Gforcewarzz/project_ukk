@@ -1,5 +1,6 @@
 <?php
-// master_penjualan_edit.php
+session_start();
+include 'session.php';
 include '../config/koneksi.php';
 
 $penjualan_id = $_GET['id'] ?? '';
@@ -105,80 +106,80 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Penjualan</title>
     <style>
-    /* Gunakan style yang sama dengan form add */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fc;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
+        /* Gunakan style yang sama dengan form add */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-    h2 {
-        color: #1d2671;
-        text-align: center;
-        margin-top: 20px;
-    }
+        h2 {
+            color: #1d2671;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    form {
-        width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+        form {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    select,
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-    button {
-        background-color: #1d2671;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
+        button {
+            background-color: #1d2671;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-    button:hover {
-        background-color: #4a2b98;
-    }
+        button:hover {
+            background-color: #4a2b98;
+        }
 
-    #produk-container .produk-item {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
+        #produk-container .produk-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
 
-    .produk-item select,
-    .produk-item input {
-        width: 45%;
-    }
+        .produk-item select,
+        .produk-item input {
+            width: 45%;
+        }
 
-    .remove-button {
-        background-color: red;
-        color: white;
-        padding: 5px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+        .remove-button {
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    .remove-button:hover {
-        background-color: #a51212;
-    }
+        .remove-button:hover {
+            background-color: #a51212;
+        }
     </style>
 </head>
 
@@ -200,19 +201,19 @@ if (isset($_POST['submit'])) {
 
         <div id="produk-container">
             <?php foreach ($details as $detail): ?>
-            <div class="produk-item">
-                <select name="produk_id[]" required>
-                    <?php
+                <div class="produk-item">
+                    <select name="produk_id[]" required>
+                        <?php
                         $query = mysqli_query($conn, "SELECT * FROM produk");
                         while ($pro = mysqli_fetch_assoc($query)) {
                             $selected = ($pro['ProdukID'] == $detail['ProdukID']) ? 'selected' : '';
                             echo "<option value='{$pro['ProdukID']}' $selected>{$pro['NamaProduk']}</option>";
                         }
                         ?>
-                </select>
-                <input type="number" name="jumlah[]" value="<?= $detail['JumlahProduk'] ?>" required>
-                <button type="button" class="remove-button" onclick="removeProduk(this)">Kurangi</button>
-            </div>
+                    </select>
+                    <input type="number" name="jumlah[]" value="<?= $detail['JumlahProduk'] ?>" required>
+                    <button type="button" class="remove-button" onclick="removeProduk(this)">Kurangi</button>
+                </div>
             <?php endforeach; ?>
         </div>
 
@@ -221,30 +222,30 @@ if (isset($_POST['submit'])) {
     </form>
 
     <script>
-    function tambahProduk() {
-        var container = document.getElementById('produk-container');
-        var itemFirst = container.children[0];
-        var item = itemFirst.cloneNode(true);
+        function tambahProduk() {
+            var container = document.getElementById('produk-container');
+            var itemFirst = container.children[0];
+            var item = itemFirst.cloneNode(true);
 
-        // Reset values
-        item.getElementsByTagName('select')[0].value = '';
-        item.getElementsByTagName('input')[0].value = '';
+            // Reset values
+            item.getElementsByTagName('select')[0].value = '';
+            item.getElementsByTagName('input')[0].value = '';
 
-        // Show remove button
-        item.querySelector('.remove-button').style.display = 'inline-block';
+            // Show remove button
+            item.querySelector('.remove-button').style.display = 'inline-block';
 
-        container.appendChild(item);
-    }
-
-    function removeProduk(button) {
-        var container = document.getElementById('produk-container');
-        if (container.children.length > 1) {
-            var item = button.closest('.produk-item');
-            item.remove();
-        } else {
-            alert('Minimal harus ada satu produk!');
+            container.appendChild(item);
         }
-    }
+
+        function removeProduk(button) {
+            var container = document.getElementById('produk-container');
+            if (container.children.length > 1) {
+                var item = button.closest('.produk-item');
+                item.remove();
+            } else {
+                alert('Minimal harus ada satu produk!');
+            }
+        }
     </script>
 </body>
 

@@ -8,17 +8,17 @@
             <i class="fas fa-user"></i>
             <span>Kelola Users</span>
         </a>
-        <a href="master_produk.php" class="nav-link">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Kelola Produk</span>
+        <a href="master_pelanggan.php" class="nav-link">
+            <i class="fas fa-users"></i>
+            <span>Pelanggan</span>
         </a>
         <a href="master_penjualan.php" class="nav-link">
             <i class="fas fa-chart-bar"></i>
             <span>Penjualan</span>
         </a>
-        <a href="master_pelanggan.php" class="nav-link">
-            <i class="fas fa-users"></i>
-            <span>Pelanggan</span>
+        <a href="master_produk.php" class="nav-link">
+            <i class="fas fa-tag"></i>
+            <span>Kelola Produk</span>
         </a>
     </nav>
 </div>

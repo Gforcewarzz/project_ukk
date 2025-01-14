@@ -1,7 +1,7 @@
 <?php
-// master_penjualan_add.php
+session_start();
+include 'session.php';
 include '../config/koneksi.php';
-
 if (isset($_POST['submit'])) {
     $pelanggan_id = $_POST['pelanggan_id'];
     $tanggal = date('Y-m-d');
@@ -89,81 +89,81 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Penjualan</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fc;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-    h2 {
-        color: #1d2671;
-        text-align: center;
-        margin-top: 20px;
-    }
+        h2 {
+            color: #1d2671;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    form {
-        width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+        form {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    select,
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-    button {
-        background-color: #1d2671;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
+        button {
+            background-color: #1d2671;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-    button:hover {
-        background-color: #4a2b98;
-    }
+        button:hover {
+            background-color: #4a2b98;
+        }
 
-    #produk-container .produk-item {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
+        #produk-container .produk-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
 
-    .produk-item select,
-    .produk-item input {
-        width: 45%;
-    }
+        .produk-item select,
+        .produk-item input {
+            width: 45%;
+        }
 
-    .remove-button {
-        background-color: red;
-        color: white;
-        padding: 5px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        display: none;
-        /* Hide initially */
-    }
+        .remove-button {
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+            /* Hide initially */
+        }
 
-    .remove-button:hover {
-        background-color: #a51212;
-    }
+        .remove-button:hover {
+            background-color: #a51212;
+        }
     </style>
 </head>
 
@@ -177,7 +177,7 @@ if (isset($_POST['submit'])) {
                 <?php
                 $query = mysqli_query($conn, "SELECT * FROM pelanggan");
                 foreach ($query as $pel): ?>
-                <option value="<?= $pel['PelangganID'] ?>"><?= $pel['NamaPelanggan'] ?></option>
+                    <option value="<?= $pel['PelangganID'] ?>"><?= $pel['NamaPelanggan'] ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -189,7 +189,7 @@ if (isset($_POST['submit'])) {
                     <?php
                     $query = mysqli_query($conn, "SELECT * FROM produk");
                     foreach ($query as $pro): ?>
-                    <option value="<?= $pro['ProdukID'] ?>"><?= $pro['NamaProduk'] ?></option>
+                        <option value="<?= $pro['ProdukID'] ?>"><?= $pro['NamaProduk'] ?></option>
                     <?php endforeach; ?>
                 </select>
                 <input type="number" name="jumlah[]" placeholder="Jumlah" required>
@@ -204,20 +204,20 @@ if (isset($_POST['submit'])) {
     </form>
 
     <script>
-    function tambahProduk() {
-        var container = document.getElementById('produk-container');
-        var item = container.children[0].cloneNode(true);
-        item.getElementsByTagName('select')[0].value = '';
-        item.getElementsByTagName('input')[0].value = '';
-        // Show the "Kurangi" button for the new item
-        item.querySelector('.remove-button').style.display = 'inline-block';
-        container.appendChild(item);
-    }
+        function tambahProduk() {
+            var container = document.getElementById('produk-container');
+            var item = container.children[0].cloneNode(true);
+            item.getElementsByTagName('select')[0].value = '';
+            item.getElementsByTagName('input')[0].value = '';
+            // Show the "Kurangi" button for the new item
+            item.querySelector('.remove-button').style.display = 'inline-block';
+            container.appendChild(item);
+        }
 
-    function removeProduk(button) {
-        var item = button.closest('.produk-item');
-        item.remove();
-    }
+        function removeProduk(button) {
+            var item = button.closest('.produk-item');
+            item.remove();
+        }
     </script>
 </body>
 

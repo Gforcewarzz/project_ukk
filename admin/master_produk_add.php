@@ -1,6 +1,7 @@
 <?php
-require '../config/koneksi.php';
-
+session_start();
+include 'session.php';
+include '../config/koneksi.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $namaProduk = $_POST['nama_produk'];
     $harga = $_POST['harga'];
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #1d2671, #c33764);
+            background: linear-gradient(to bottom, #1d2671, #1e1b4b);
             color: #333;
             display: flex;
             justify-content: center;
@@ -97,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
+            margin: 5px 0;
         }
 
         .form-container button:hover {
@@ -126,6 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" id="stok" name="stok" required>
 
             <button type="submit">Tambah</button>
+            <button type="button" onclick="window.history.back();">Kembali</button>
+
         </form>
     </div>
 </body>

@@ -1,7 +1,7 @@
 <?php
-// master_penjualan_delete.php
+session_start();
+include 'session.php';
 include '../config/koneksi.php';
-
 // Check if ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "<script>

@@ -1,6 +1,7 @@
 <?php
-require '../config/koneksi.php';
-
+session_start();
+include 'session.php';
+include '../config/koneksi.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password
@@ -32,90 +33,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Registrasi</title>
     <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(to bottom, #1d2671, #c33764);
-        color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1d2671, #c33764);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .form-container {
-        background: #f9f9f9;
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 420px;
-        text-align: center;
-    }
+        .form-container {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
 
-    .form-container h2 {
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        color: #1d2671;
-        font-family: 'Roboto Slab', serif;
-    }
+        .form-container h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: #1d2671;
+            font-family: 'Roboto Slab', serif;
+        }
 
-    .form-container label {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333;
-        display: block;
-        margin: 1rem 0 0.5rem;
-        text-align: left;
-    }
+        .form-container label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin: 1rem 0 0.5rem;
+            text-align: left;
+        }
 
-    .form-container input,
-    .form-container select {
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        font-size: 1rem;
-        font-family: 'Roboto', sans-serif;
-        width: 100%;
-        padding: 0.9rem;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
+        .form-container input,
+        .form-container select {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            width: 100%;
+            padding: 0.9rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease-in-out;
+        }
 
-    .form-container input:focus,
-    .form-container select:focus {
-        border-color: #1d2671;
-        outline: none;
-        box-shadow: 0 0 8px rgba(29, 38, 113, 0.3);
-    }
+        .form-container input:focus,
+        .form-container select:focus {
+            border-color: #1d2671;
+            outline: none;
+            box-shadow: 0 0 8px rgba(29, 38, 113, 0.3);
+        }
 
-    .form-container button {
-        width: 100%;
-        padding: 0.9rem;
-        background: linear-gradient(to right, #1d2671, #c33764);
-        color: #fff;
-        border: none;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+        .form-container button {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(to right, #1d2671, #c33764);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    .form-container button:hover {
-        background: linear-gradient(to right, #c33764, #1d2671);
-    }
+        .form-container button:hover {
+            background: linear-gradient(to right, #c33764, #1d2671);
+        }
 
-    .retro {
-        font-family: 'Roboto Mono', monospace;
-        color: #c33764;
-        margin-top: 1rem;
-        font-size: 0.9rem;
-    }
+        .retro {
+            font-family: 'Roboto Mono', monospace;
+            color: #c33764;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 

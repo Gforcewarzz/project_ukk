@@ -1,6 +1,7 @@
 <?php
+session_start();
+include 'session.php';
 include '../config/koneksi.php';
-
 // Periksa apakah ProdukID dikirim melalui URL
 if (isset($_GET['ProdukID'])) {
     $produkID = $_GET['ProdukID'];

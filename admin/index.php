@@ -243,7 +243,7 @@ $data_produk = mysqli_fetch_assoc($result_produk);
             <div class="card">
                 <div class="card-header">
                     <div class="card-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-user"></i>
                     </div>
                 </div>
                 <h3>Total Pengguna</h3>
@@ -254,7 +254,7 @@ $data_produk = mysqli_fetch_assoc($result_produk);
             <div class="card">
                 <div class="card-header">
                     <div class="card-icon">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-users"></i>
                     </div>
                 </div>
                 <h3>Total Pelanggan</h3>
@@ -265,7 +265,7 @@ $data_produk = mysqli_fetch_assoc($result_produk);
             <div class="card">
                 <div class="card-header">
                     <div class="card-icon">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                 </div>
                 <h3>Total Penjualan</h3>
@@ -276,7 +276,7 @@ $data_produk = mysqli_fetch_assoc($result_produk);
             <div class="card">
                 <div class="card-header">
                     <div class="card-icon">
-                        <i class="fas fa-cogs"></i>
+                        <i class="fas fa-tag"></i>
                     </div>
                 </div>
                 <h3>Total Produk</h3>

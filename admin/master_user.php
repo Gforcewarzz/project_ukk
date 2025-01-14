@@ -1,6 +1,7 @@
 <?php
+session_start();
+include 'session.php';
 include '../config/koneksi.php';
-
 $query = mysqli_query($conn, "SELECT * FROM users");
 
 if (!$query) {
