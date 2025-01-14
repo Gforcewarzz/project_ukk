@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,6 +140,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     a:hover {
         text-decoration: underline;
     }
+
+    .form-container .login-pelanggan-link {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        color: blue;
+        font-weight: bold;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
     </style>
 </head>
 
@@ -157,6 +168,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
         </form>
+        <a href="login_pelanggan.php" class="login-pelanggan-link">Login as Pelanggan</a>
+
     </div>
 </body>
 
