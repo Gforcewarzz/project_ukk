@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     mysqli_begin_transaction($conn);
 
     try {
-        // Insert penjualan
+        // Insert pembelian
         $query_penjualan = "INSERT INTO penjualan (TanggalPenjualan, TotalHarga, PelangganID) 
                            VALUES ('$tanggal', '$total_harga', '$pelanggan_id')";
         if (!mysqli_query($conn, $query_penjualan)) {
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
             $query_detail = "INSERT INTO detailpenjualan (PenjualanID, ProdukID, JumlahProduk, SubTotal) 
                            VALUES ('$penjualan_id', '$produk_id', '$jumlah', '$subtotal')";
             if (!mysqli_query($conn, $query_detail)) {
-                throw new Exception("Gagal menambahkan detail penjualan!");
+                throw new Exception("Gagal menambahkan detail pembelian!");
             }
         }
 
@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
         mysqli_commit($conn);
 
         echo "<script>
-                alert('Penjualan berhasil ditambahkan!');
+                alert('pembelian berhasil ditambahkan!');
                 window.location.href = 'master_penjualan.php';
               </script>";
         exit();
@@ -88,89 +88,89 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Penjualan</title>
+    <title>Tambah pembelian</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7fc;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-    h2 {
-        color: #1d2671;
-        text-align: center;
-        margin-top: 20px;
-    }
+        h2 {
+            color: #1d2671;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    form {
-        width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: white;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+        form {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-       
-    select,
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
 
-    button {
-        background-color: #1d2671;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-    button:hover {
-        background-color: #4a2b98;
-    }
+        button {
+            background-color: #1d2671;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-    #produk-container .produk-item {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-       
+        button:hover {
+            background-color: #4a2b98;
+        }
 
-    .produk-item select,
-    .produk-item input {
-        width: 45%;
-    }
+        #produk-container .produk-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
 
-    .remove-button {
-        background-color: red;
-        color: white;
-        padding: 5px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        display: none;
-    }
 
-    .remove-button:hover {
-        background-color: #a51212;
-    }
+        .produk-item select,
+        .produk-item input {
+            width: 45%;
+        }
+
+        .remove-button {
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .remove-button:hover {
+            background-color: #a51212;
+        }
     </style>
 </head>
 
 <body>
-    <h2>Tambah Penjualan Baru</h2>
+    <h2>Tambah pembelian Baru</h2>
     <form method="POST">
         <div class="form-group">
             <label for="pelanggan">Pelanggan:</label>
@@ -185,7 +185,7 @@ if (isset($_POST['submit'])) {
                     <?php
                     $query = mysqli_query($conn, "SELECT * FROM produk");
                     foreach ($query as $pro): ?>
-                    <option value="<?= $pro['ProdukID'] ?>"><?= $pro['NamaProduk'] ?></option>
+                        <option value="<?= $pro['ProdukID'] ?>"><?= $pro['NamaProduk'] ?></option>
                     <?php endforeach; ?>
                 </select>
                 <input type="number" name="jumlah[]" placeholder="Jumlah" required>
@@ -199,20 +199,21 @@ if (isset($_POST['submit'])) {
     </form>
 
     <script>
-    function tambahProduk() {
-        var container = document.getElementById('produk-container');
-        var item = container.children[0].cloneNode(true);
-        item.getElementsByTagName('select')[0].value = '';
-        item.getElementsByTagName('input')[0].value = '';
-        item.querySelector('.remove-button').style.display = 'inline-block';
-        container.appendChild(item);
-    }
+        function tambahProduk() {
+            var container = document.getElementById('produk-container');
+            var item = container.children[0].cloneNode(true);
+            item.getElementsByTagName('select')[0].value = '';
+            item.getElementsByTagName('input')[0].value = '';
+            item.querySelector('.remove-button').style.display = 'inline-block';
+            container.appendChild(item);
+        }
 
-    function removeProduk(button) {
-        var item = button.closest('.produk-item');
-       
- item.remove();
-    }    </script>
+        function removeProduk(button) {
+            var item = button.closest('.produk-item');
+
+            item.remove();
+        }
+    </script>
 </body>
 
 </html>
